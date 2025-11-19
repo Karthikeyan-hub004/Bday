@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday My Gem 💎</title>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: radial-gradient(circle at top left, #ff9a9e, #fad0c4, #a18cd1);
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    position: relative;
+    padding: 20px;
+  }
+
+  h1 {
+    color: #fff;
+    font-size: 2rem;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255,255,255,0.8);
+    margin-bottom: 20px;
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from { text-shadow: 0 0 10px #fff, 0 0 20px #ff80ab; }
+    to { text-shadow: 0 0 20px #fff, 0 0 30px #ff4081; }
+  }
+
+  button {
+    background: linear-gradient(45deg, #ff80ab, #ff4081, #f50057);
+    border: none;
+    padding: 12px 30px;
+    color: white;
+    font-size: 1.1rem;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(255,64,129,0.6);
+  }
+
+  button:active {
+    transform: scale(0.95);
+  }
+
+  .popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    max-width: 380px;
+    transform: translate(-50%, -50%) scale(0);
+    background: rgba(255, 255, 255, 0.97);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(255,105,180,0.6);
+    transition: transform 0.4s ease;
+    z-index: 1000;
+  }
+
+  .popup.active {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .popup h2 {
+    color: #ff4081;
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+  }
+
+  .popup p {
+    color: #444;
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 20px;
+  }
+
+  .close-btn {
+    background: linear-gradient(45deg, #ff4081, #ff80ab);
+    border: none;
+    padding: 10px 22px;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  /* Floating animations */
+  .sparkle, .heart, .star {
+    position: absolute;
+    pointer-events: none;
+    animation: float 4s linear forwards;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-100vh) scale(1.3); opacity: 0; }
+  }
+  #hiddenImage {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+#hiddenImage.show {
+  opacity: 1;
+}
+
+
+</style>
+</head>
+
+<body>
+<audio id="birthdayMusic" preload="auto" loop>
+  <source src="I Wish You Happy Birthday Song Mp3 Ringtone Download Audio.mp3" type="audio/mpeg">
+</audio>
+<img id="hiddenImage" src="images.jpg" alt="Birthday Surprise" style="display:none; max-width:90%; border-radius:15px; margin-top:20px;">
+
+
+<h1>💎 Tap to Reveal Your Birthday Surprise 💖</h1>
+<button id="wishBtn">✨ Tap Me 🎁</button>
+
+<div class="popup" id="popup">
+  <h2>🎉 Happy Birthday, Divyasri 💎</h2>
+  <p>Enjoy your level up day happly 😎<br>Always be with smile ☺️.<br>Make Happy yourself by your own way 🥰.
+     <br>Your are a GEM 💎 don't think about others.<br>
+     <b>I always there for you in every situation 🤗</b><br>God bless always with you ✨.
+     <br>
+🌟💖🎂</p>
+  <button class="close-btn" id="closeBtn">Close ✨</button>
+</div>
+
+<script>
+const btn = document.getElementById('wishBtn');
+const popup = document.getElementById('popup');
+const closeBtn = document.getElementById('closeBtn');
+const music = document.getElementById('birthdayMusic');
+const hiddenImage = document.getElementById('hiddenImage');
+
+btn.addEventListener('click', () => {
+  popup.classList.add('active');
+  createSparkles();
+  createHearts();
+  createStars();
+
+  // Play music
+  music.currentTime = 0;
+  music.play();
+
+  // Show hidden image with fade-in
+  hiddenImage.style.display = "block";
+  hiddenImage.classList.add("show");
+});
+
+closeBtn.addEventListener('click', () => {
+  popup.classList.remove('active');
+  music.pause();
+
+  // Hide image with fade-out
+  hiddenImage.classList.remove("show");
+  hiddenImage.style.display = "none";
+});
+
+// Sparkles
+function createSparkles() {
+  for (let i = 0; i < 60; i++) {
+    const s = document.createElement('div');
+    s.classList.add('sparkle');
+    s.style.left = Math.random() * 100 + 'vw';
+    s.style.bottom = '0';
+    s.style.width = s.style.height = Math.random() * 6 + 4 + 'px';
+    s.style.backgroundColor = randomColor();
+    s.style.borderRadius = '50%';
+    s.style.animationDuration = (Math.random() * 2 + 2) + 's';
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 3500);
+  }
+}
+
+// Hearts
+function createHearts() {
+  for (let i = 0; i < 12; i++) {
+    const h = document.createElement('div');
+    h.classList.add('heart');
+    h.innerHTML = "❤️";
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.bottom = '0';
+    h.style.fontSize = Math.random() * 22 + 20 + 'px';
+    h.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 4000);
+  }
+}
+
+// Stars
+function createStars() {
+  for (let i = 0; i < 20; i++) {
+    const st = document.createElement('div');
+    st.classList.add('star');
+    st.innerHTML = "✨";
+    st.style.left = Math.random() * 100 + 'vw';
+    st.style.bottom = '0';
+    st.style.fontSize = Math.random() * 12 + 12 + 'px';
+    st.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    document.body.appendChild(st);
+    setTimeout(() => st.remove(), 4000);
+  }
+}
+
+function randomColor() {
+  const colors = ["#ff80ab","#ff4081","#f50057","#ffab40","#ffea00","#69f0ae","#40c4ff","#7c4dff"];
+  return colors[Math.floor(Math.random()*colors.length)];
+}
+</script>
+
+</body>
+</html>
